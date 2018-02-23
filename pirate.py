@@ -77,12 +77,20 @@ def printResults(items):
     for i in range(0, len(items)):
         row = [items[i].name, items[i].type[0], items[i].seeds, items[i].leechers]
         data.append(row)
-        #print("{: <20} {: <20} {: <20} {: <20}".format(*row))
-        #print (bcolors.OKGREEN + '[' + str(i) + '] ' +
-        #    bcolors.ENDC + items[i].name + ' ' + items[i].type[0] + ' ' + items[i].seeds + ' ' + items[i].leechers)
+
     widths = [max(map(len, col)) for col in zip(*data)]
+
+    headers = ["ID", "Name", "Type", "Seeds", "Leechers"]
+    idWidth = 10;
+
+    widths.insert(0, idWidth)
+
+    print "  ".join(itertools.chain((bcolors.BOLD + val.ljust(width) + bcolors.ENDC for val, width in zip(headers, widths))))
+
     for i in range(0, len(items)):
-        print "  ".join(itertools.chain([bcolors.OKGREEN + '[' + str(i) + '] ' + bcolors.ENDC], (val.ljust(width) for val, width in zip(data[i], widths))))
+        theStr = (bcolors.OKGREEN + ('[' + str(i) + ']').ljust(idWidth) + bcolors.ENDC)
+        iterch = itertools.chain([theStr], data[i])
+        print "  ".join((val.ljust(width) for val, width in zip(iterch, widths)))
 
 def getSearchIndex():
     consoleInput = raw_input("Enter id: ")
