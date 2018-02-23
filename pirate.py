@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import click
 
+# This module handles the interface for the pirate parser
+
 from pirateparser import PirateParser
 from bcolors import bcolors
 from subprocess import call

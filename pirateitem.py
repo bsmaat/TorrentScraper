@@ -3,6 +3,9 @@
 from bs4 import BeautifulSoup
 import requests
 
+# The PirateItem class is a class that contains the information about the possible torrent download
+# TODO: add size of file
+
 class PirateItem:
 
     def __init__(self, name, address, type, seeds, leechers ):
@@ -12,6 +15,7 @@ class PirateItem:
         self.seeds = seeds
         self.leechers = leechers
 
+    # Get the magnetic link of this PirateItem
     def getLink(self):
         page = requests.get(self.address);
         if (page.status_code == 200):

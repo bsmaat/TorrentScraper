@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+# Class for colours
+
 class bcolors:
 
     HEADER = '\033[95m'

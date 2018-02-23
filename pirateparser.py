@@ -5,6 +5,8 @@ import urllib
 from bs4 import BeautifulSoup
 from pirateitem import PirateItem
 
+# The pirate parser searches a pirate bay link and parses the results
+
 class PirateParser:
 
     webpage = "https://tpb.tw"
