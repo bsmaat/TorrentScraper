@@ -8,12 +8,13 @@ import requests
 
 class PirateItem:
 
-    def __init__(self, name, address, type, seeds, leechers ):
+    def __init__(self, name, address, type, seeds, leechers, filesize):
         self.name = name
         self.address = address
         self.type = type
         self.seeds = seeds
         self.leechers = leechers
+        self.filesize = filesize
 
     # Get the magnetic link of this PirateItem
     def getLink(self):

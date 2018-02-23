@@ -77,13 +77,13 @@ def checkInput(consoleInput):
 def printResults(items):
     data = []
     for i in range(0, len(items)):
-        row = [items[i].name, items[i].type[0], items[i].seeds, items[i].leechers]
+        row = [items[i].name, items[i].type[0], items[i].seeds, items[i].leechers, items[i].filesize]
         data.append(row)
 
     widths = [max(map(len, col)) for col in zip(*data)]
 
-    headers = ["ID", "Name", "Type", "Seeds", "Leechers"]
-    idWidth = 10;
+    headers = ["ID", "Name", "Type", "SE", "LE", "Size"]
+    idWidth = 5;
 
     widths.insert(0, idWidth)
 

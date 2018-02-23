@@ -4,6 +4,7 @@ import requests
 import urllib
 from bs4 import BeautifulSoup
 from pirateitem import PirateItem
+import re
 
 # The pirate parser searches a pirate bay link and parses the results
 
@@ -41,17 +42,28 @@ class PirateParser:
                             for typeLink in typeLinks:
                                 lstTdTypes.append(typeLink.text)
 
+                    font = tr.find(class_="detDesc")
+                    if font:
+                        desc = font.text
+                        pattern = re.compile(ur'.*Size (\d+\.\d*)\s(.*),.*', re.UNICODE)
+                        m = pattern.search(desc)
+                        if m:
+                            filesize = m.group(1) + " " + m.group(2)
+
+
+                    # find teh seeds and leechers
                     tds = tr.find_all('td', {'align': 'right'})
                     if tds:
                         seeds = tds[0].text
                         leechers = tds[1].text
+
 
                     # find the div with the title of the download
                     div = tr.find(class_="detName")
                     if div:
                         link = div.find("a")
                         linkAddress = self.webpage + link.get("href")
-                        item = PirateItem(link.get_text(), linkAddress, lstTdTypes, seeds, leechers)
+                        item = PirateItem(link.get_text(), linkAddress, lstTdTypes, seeds, leechers, filesize)
                         items.append(item)
 
 
