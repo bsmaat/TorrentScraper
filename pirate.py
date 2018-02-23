@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
 import click
 
 # This module handles the interface for the pirate parser
@@ -43,6 +45,7 @@ def start(search, webpage):
             items.clear()
             pageNumber = 0
             search = getSearchInput()
+            success = True
             continue
         elif (index == InputResult.Exit):
             exitProgram()
@@ -72,7 +75,6 @@ def getSearchInput():
 def checkInput(consoleInput):
     if (consoleInput == "exit"):
         return InputResult.Exit
-        #return InputResult.Exit
     elif (consoleInput == "next"):
         return InputResult.Next
     elif (consoleInput == "search"):
