@@ -12,24 +12,26 @@ import itertools
 @click.option('--search','-s', prompt='Search string', help='The search string')
 @click.option('--webpage','-w', default='https://tpb.tw', help='The pirate bay site')
 def start(search, webpage):
-    strIntro = "PirateBay Downloader, by TheFreePhysicist"
+
+    displayIntro()
 
     pirate = PirateParser(webpage)
+
+    click.secho('URL: ' + pirate.webpage, fg='cyan')
+    click.secho('Search term: ' + search, fg='cyan')
 
     items = []
 
     pageNumber = 0
-
-    click.echo(strIntro)
-    click.echo("URL: " + pirate.webpage)
-
-    click.echo("Search term: " + search)
 
     success = True
     while (True):
         if (success):
             newItems = pirate.searchPage(search, pageNumber)
             items.extend(newItems)
+            if len(items) == 0:
+                click.secho('No results', fg='green')
+                exitProgram()
             printResults(items)
 
         index = getSearchIndex()
@@ -53,6 +55,10 @@ def start(search, webpage):
             print "Incorrect index!"
             success = False
             continue
+
+def displayIntro():
+    strIntro = "PirateBay Downloader, by TheFreePhysicist"
+    click.secho(strIntro, fg='magenta')
 
 class InputResult(object):
     Exit = 0
